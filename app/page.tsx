@@ -126,6 +126,15 @@ export default function Home() {
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.45 }}
+                className="text-xl sm:text-2xl font-medium text-muted-foreground"
+              >
+                Digital Marketer · Freelancer · Digital Creator
+              </motion.p>
+
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.5 }}
                 className="text-lg sm:text-xl text-muted-foreground leading-relaxed max-w-2xl"
               >
