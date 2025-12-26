@@ -35,18 +35,28 @@ export function MobileNav() {
 
   return (
     <div className="md:hidden">
-      <Button
-        variant="ghost"
-        size="icon"
-        onClick={() => setOpen(!open)}
-        aria-label="Toggle menu"
+      <motion.div
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
       >
-        {open ? (
-          <X className="h-5 w-5" />
-        ) : (
-          <Menu className="h-5 w-5" />
-        )}
-      </Button>
+        <Button
+          variant="secondary"
+          size="icon"
+          onClick={() => setOpen(!open)}
+          aria-label="Toggle menu"
+        >
+          <motion.div
+            animate={open ? { rotate: 90 } : { rotate: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            {open ? (
+              <X className="h-5 w-5" />
+            ) : (
+              <Menu className="h-5 w-5" />
+            )}
+          </motion.div>
+        </Button>
+      </motion.div>
 
       <AnimatePresence>
         {open && (
@@ -67,22 +77,39 @@ export function MobileNav() {
               className="fixed top-0 right-0 bottom-0 w-64 bg-background border-l border-border z-50 p-6"
             >
               <div className="flex flex-col space-y-4 mt-16">
-                {navItems.map((item) => {
+                {navItems.map((item, index) => {
                   const isActive = pathname === item.href;
                   return (
-                    <Link
+                    <motion.div
                       key={item.href}
-                      href={item.href}
-                      onClick={() => setOpen(false)}
-                      className={cn(
-                        "px-4 py-2 text-base font-medium rounded-md transition-colors",
-                        isActive
-                          ? "bg-primary text-primary-foreground"
-                          : "text-muted-foreground hover:text-foreground hover:bg-accent"
-                      )}
+                      initial={{ opacity: 0, x: 50 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: 50 }}
+                      transition={{ 
+                        duration: 0.3, 
+                        delay: index * 0.05,
+                        type: "spring",
+                        stiffness: 200
+                      }}
                     >
-                      {item.name}
-                    </Link>
+                      <Link
+                        href={item.href}
+                        onClick={() => setOpen(false)}
+                        className={cn(
+                          "block px-4 py-2 text-base font-medium rounded-md transition-colors",
+                          isActive
+                            ? "bg-primary text-primary-foreground"
+                            : "text-muted-foreground hover:text-foreground hover:bg-accent"
+                        )}
+                      >
+                        <motion.div
+                          whileHover={{ x: 5 }}
+                          whileTap={{ scale: 0.95 }}
+                        >
+                          {item.name}
+                        </motion.div>
+                      </Link>
+                    </motion.div>
                   );
                 })}
               </div>

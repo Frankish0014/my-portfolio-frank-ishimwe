@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { Github, Linkedin, Mail } from "lucide-react";
+import { Github, Linkedin, Mail, Phone, MessageCircle } from "lucide-react";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -19,11 +19,27 @@ export function Footer() {
           
           <div className="flex items-center space-x-4">
             <a
-              href="mailto:frank.ishimwe@example.com"
+              href="mailto:ishimwefrank0014@gmail.com"
               className="text-muted-foreground hover:text-primary transition-colors"
               aria-label="Email"
             >
               <Mail className="h-5 w-5" />
+            </a>
+            <a
+              href="tel:+250782658368"
+              className="text-muted-foreground hover:text-primary transition-colors"
+              aria-label="Phone"
+            >
+              <Phone className="h-5 w-5" />
+            </a>
+            <a
+              href="https://wa.me/250782658368"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-muted-foreground hover:text-primary transition-colors"
+              aria-label="WhatsApp"
+            >
+              <MessageCircle className="h-5 w-5" />
             </a>
             <a
               href="https://github.com/Frankish0014"

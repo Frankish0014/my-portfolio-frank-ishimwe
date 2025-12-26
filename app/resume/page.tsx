@@ -9,10 +9,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 export default function ResumePage() {
   const handleDownload = () => {
     // Create a temporary link to download the resume
-    // In production, replace with actual resume PDF path
     const link = document.createElement("a");
-    link.href = "/resume.pdf"; // Update with actual resume path
-    link.download = "Frank_ISHIMWE_Resume.pdf";
+    link.href = "/Frank Ishimwe Resume 2025.pdf"; // Resume file path
+    link.download = "Frank Ishimwe Resume 2025.pdf";
     link.click();
   };
 
@@ -28,7 +27,7 @@ export default function ResumePage() {
           <div className="text-center mb-8">
             <h1 className="text-4xl sm:text-5xl font-bold mb-4">Resume</h1>
             <p className="text-lg text-muted-foreground mb-6">
-              Download my resume or view it online
+              Download my resume in PDF format
             </p>
             <Button onClick={handleDownload} size="lg" className="group">
               <Download className="mr-2 h-4 w-4" />
@@ -53,37 +52,16 @@ export default function ResumePage() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="aspect-[8.5/11] w-full bg-muted rounded-lg flex items-center justify-center border-2 border-dashed border-border">
-                  <div className="text-center space-y-4 p-8">
-                    <FileText className="h-16 w-16 text-muted-foreground mx-auto" />
-                    <div>
-                      <p className="text-lg font-semibold mb-2">Resume PDF</p>
-                      <p className="text-sm text-muted-foreground mb-4">
-                        Add your resume PDF to the public folder as &quot;resume.pdf&quot;
-                      </p>
-                      <p className="text-xs text-muted-foreground">
-                        For now, you can use an iframe or embed tag when the PDF is available:
-                      </p>
-                      <code className="text-xs bg-background p-2 rounded mt-2 inline-block">
-                        {"<iframe src='/resume.pdf' className='w-full h-full' />"}
-                      </code>
-                    </div>
-                  </div>
+                <div className="aspect-[8.5/11] w-full rounded-lg overflow-hidden border">
+                  <iframe
+                    src="/Frank Ishimwe Resume 2025.pdf"
+                    className="w-full h-full border-0"
+                    title="Resume Preview"
+                  />
                 </div>
               </CardContent>
             </Card>
           </motion.div>
-
-          {/* Alternative: If you have the PDF ready, uncomment this */}
-          {/* 
-          <div className="mt-8">
-            <iframe
-              src="/resume.pdf"
-              className="w-full aspect-[8.5/11] border rounded-lg"
-              title="Resume"
-            />
-          </div>
-          */}
         </motion.div>
       </section>
     </div>

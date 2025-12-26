@@ -6,7 +6,7 @@ import Link from "next/link";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { GraduationCap, Award, Code, Trophy, ExternalLink } from "lucide-react";
+import { GraduationCap, Award, Code, Trophy, ExternalLink, Briefcase } from "lucide-react";
 
 const education = [
   {
@@ -25,6 +25,7 @@ const certifications = [
     period: "2024",
     description: "Specialized certification in applying AI technologies to marketing strategies and campaigns.",
     icon: Award,
+    certificateUrl: "/AI in marketing certficate.pdf",
   },
   {
     title: "Digital Marketing",
@@ -32,6 +33,7 @@ const certifications = [
     period: "2024",
     description: "Comprehensive digital marketing certification covering modern marketing strategies and tools.",
     icon: Award,
+    certificateUrl: "/AlibabaNetpreneurTrainingOnlineCourse.pdf",
   },
   {
     title: "Data Visualization with Python",
@@ -49,9 +51,63 @@ const certifications = [
     icon: Award,
     certificateUrl: "/images/Internation Organization of Youth certficate.pdf",
   },
+  {
+    title: "CSP Green Coffee - Intermediate",
+    issuer: "SCA (Specialty Coffee Association)",
+    period: "2024",
+    description: "SCA-certified intermediate certification in green coffee processing, covering coffee bean selection, quality assessment, and processing techniques.",
+    icon: Award,
+    certificateUrl: "/images/Green_Coffee_Intermediate_Certificate_Ishimwe_Frank.pdf",
+  },
+  {
+    title: "CSP Sensory Skills - Intermediate",
+    issuer: "SCA (Specialty Coffee Association)",
+    period: "2024",
+    description: "SCA-certified intermediate certification in coffee sensory skills, focusing on cupping techniques, flavor profiling, and quality evaluation.",
+    icon: Award,
+    certificateUrl: "/images/Sensory_Skills_Intermediate_Certificate_Ishimwe_Frank.pdf",
+  },
+  {
+    title: "HTML, CSS, and JavaScript for Web Developers",
+    issuer: "Coursera",
+    period: "2024",
+    description: "Comprehensive certification in web development fundamentals covering HTML5, CSS3, and JavaScript for building modern, responsive web applications.",
+    icon: Award,
+    certificateUrl: "/HTMLCSSandJavascriptforWebDevelopers.pdf",
+  },
+  {
+    title: "Azure Virtual Machines",
+    issuer: "Microsoft Azure",
+    period: "2024",
+    description: "Certification in Microsoft Azure Virtual Machines, covering cloud infrastructure, VM deployment, management, and optimization.",
+    icon: Award,
+    certificateUrl: "/Azure VirtualMachines.pdf",
+  },
+  {
+    title: "Leadership Certificate",
+    issuer: "Leadership Development",
+    period: "2024",
+    description: "Certification recognizing leadership skills, team management, and organizational development capabilities.",
+    icon: Award,
+    certificateUrl: "/Leadership cert.pdf",
+  },
+  {
+    title: "Assistant Store Manager",
+    issuer: "VPlus",
+    period: "2024",
+    description: "Professional certification as Assistant Store Manager, demonstrating retail management, operations, and customer service expertise.",
+    icon: Award,
+    certificateUrl: "/AssistantStoreManagerAtVPlus.pdf",
+  },
 ];
 
 const practicalExperience = [
+  {
+    title: "Digital Marketing Specialist",
+    type: "Baho Coffee",
+    description: "Currently managing digital marketing at Baho Coffee, including content creation, social media management, and storytelling to connect Rwandan coffee farmers with the global specialty coffee market.",
+    icon: Briefcase,
+  },
   {
     title: "Hackathons & Competitions",
     type: "Competitive Programming",

@@ -55,6 +55,16 @@ const skillCategories = [
       { name: "VS Code", level: "Advanced" },
     ],
   },
+  {
+    category: "Coffee & Specialty Skills",
+    skills: [
+      { name: "Green Coffee Processing", level: "Intermediate" },
+      { name: "Coffee Cupping", level: "Intermediate" },
+      { name: "Sensory Evaluation", level: "Intermediate" },
+      { name: "Flavor Profiling", level: "Intermediate" },
+      { name: "Quality Assessment", level: "Intermediate" },
+    ],
+  },
 ];
 
 const getLevelColor = (level: string) => {

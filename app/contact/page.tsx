@@ -3,7 +3,7 @@
 import * as React from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Mail, Github, Linkedin, Send, ArrowRight } from "lucide-react";
+import { Mail, Github, Linkedin, Send, ArrowRight, Phone, MessageCircle, CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
@@ -11,9 +11,23 @@ const contactLinks = [
   {
     name: "Email",
     icon: Mail,
-    href: "mailto:frank.ishimwe@example.com",
+    href: "mailto:ishimwefrank0014@gmail.com",
     label: "Send me an email",
     description: "Get in touch via email",
+  },
+  {
+    name: "Phone",
+    icon: Phone,
+    href: "tel:+250782658368",
+    label: "Call me",
+    description: "+250 782 658 368",
+  },
+  {
+    name: "WhatsApp",
+    icon: MessageCircle,
+    href: "https://wa.me/250782658368",
+    label: "Chat on WhatsApp",
+    description: "Message me on WhatsApp",
   },
   {
     name: "GitHub",
@@ -32,6 +46,73 @@ const contactLinks = [
 ];
 
 export default function ContactPage() {
+  const [formData, setFormData] = React.useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
+  const [submitStatus, setSubmitStatus] = React.useState<{
+    type: "success" | "error" | null;
+    message: string;
+  }>({ type: null, message: "" });
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    // Clear status when user starts typing
+    if (submitStatus.type) {
+      setSubmitStatus({ type: null, message: "" });
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus({ type: null, message: "" });
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setSubmitStatus({
+          type: "success",
+          message: data.message || "Thank you for your message! I will get back to you soon.",
+        });
+        // Reset form
+        setFormData({
+          name: "",
+          email: "",
+          subject: "",
+          message: "",
+        });
+      } else {
+        setSubmitStatus({
+          type: "error",
+          message: data.error || "Failed to send message. Please try again.",
+        });
+      }
+    } catch (error) {
+      setSubmitStatus({
+        type: "error",
+        message: "Network error. Please check your connection and try again.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <div className="min-h-screen relative overflow-hidden">
       {/* Modern Background */}
@@ -60,7 +141,7 @@ export default function ContactPage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
             {contactLinks.map((link, index) => {
               const Icon = link.icon;
               return (
@@ -123,20 +204,25 @@ export default function ContactPage() {
                 </CardDescription>
               </CardHeader>
               <CardContent className="relative z-10">
-                <form className="space-y-6">
+                <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <label
                         htmlFor="name"
                         className="text-sm font-medium block"
                       >
-                        Name
+                        Name *
                       </label>
                       <input
                         id="name"
+                        name="name"
                         type="text"
-                        className="w-full px-4 py-3 rounded-xl border-2 border-input bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-primary transition-all"
+                        required
+                        value={formData.name}
+                        onChange={handleChange}
+                        className="w-full px-4 py-3 rounded-xl border-2 border-input bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-primary transition-all disabled:opacity-50"
                         placeholder="Your name"
+                        disabled={isSubmitting}
                       />
                     </div>
                     <div className="space-y-2">
@@ -144,13 +230,18 @@ export default function ContactPage() {
                         htmlFor="email"
                         className="text-sm font-medium block"
                       >
-                        Email
+                        Email *
                       </label>
                       <input
                         id="email"
+                        name="email"
                         type="email"
-                        className="w-full px-4 py-3 rounded-xl border-2 border-input bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-primary transition-all"
+                        required
+                        value={formData.email}
+                        onChange={handleChange}
+                        className="w-full px-4 py-3 rounded-xl border-2 border-input bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-primary transition-all disabled:opacity-50"
                         placeholder="your.email@example.com"
+                        disabled={isSubmitting}
                       />
                     </div>
                   </div>
@@ -159,13 +250,18 @@ export default function ContactPage() {
                       htmlFor="subject"
                       className="text-sm font-medium block"
                     >
-                      Subject
+                      Subject *
                     </label>
                     <input
                       id="subject"
+                      name="subject"
                       type="text"
-                      className="w-full px-4 py-3 rounded-xl border-2 border-input bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-primary transition-all"
+                      required
+                      value={formData.subject}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 rounded-xl border-2 border-input bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-primary transition-all disabled:opacity-50"
                       placeholder="What's this about?"
+                      disabled={isSubmitting}
                     />
                   </div>
                   <div className="space-y-2">
@@ -173,24 +269,60 @@ export default function ContactPage() {
                       htmlFor="message"
                       className="text-sm font-medium block"
                     >
-                      Message
+                      Message *
                     </label>
                     <textarea
                       id="message"
+                      name="message"
                       rows={6}
-                      className="w-full px-4 py-3 rounded-xl border-2 border-input bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-primary resize-none transition-all"
+                      required
+                      value={formData.message}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 rounded-xl border-2 border-input bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-primary resize-none transition-all disabled:opacity-50"
                       placeholder="Your message..."
+                      disabled={isSubmitting}
                     />
                   </div>
-                  <Button type="submit" className="group rounded-xl" size="lg">
-                    <Send className="mr-2 h-4 w-4" />
-                    Send Message
+
+                  {/* Status Messages */}
+                  {submitStatus.type && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className={`flex items-center gap-2 p-4 rounded-xl border-2 ${
+                        submitStatus.type === "success"
+                          ? "bg-green-50 dark:bg-green-950/20 border-green-200 dark:border-green-800 text-green-800 dark:text-green-200"
+                          : "bg-red-50 dark:bg-red-950/20 border-red-200 dark:border-red-800 text-red-800 dark:text-red-200"
+                      }`}
+                    >
+                      {submitStatus.type === "success" ? (
+                        <CheckCircle2 className="h-5 w-5 flex-shrink-0" />
+                      ) : (
+                        <AlertCircle className="h-5 w-5 flex-shrink-0" />
+                      )}
+                      <p className="text-sm font-medium">{submitStatus.message}</p>
+                    </motion.div>
+                  )}
+
+                  <Button 
+                    type="submit" 
+                    className="group rounded-xl" 
+                    size="lg"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        Sending...
+                      </>
+                    ) : (
+                      <>
+                        <Send className="mr-2 h-4 w-4" />
+                        Send Message
+                      </>
+                    )}
                   </Button>
                 </form>
-                <p className="text-xs text-muted-foreground mt-6">
-                  Note: This is a static form. In production, integrate with a service like Formspree, 
-                  SendGrid, or your own backend API to handle form submissions.
-                </p>
               </CardContent>
             </Card>
           </motion.div>

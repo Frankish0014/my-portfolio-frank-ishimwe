@@ -4,18 +4,23 @@ import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, Download, Code2, Brain, Database, Globe, Github, Linkedin, Mail, Sparkles } from "lucide-react";
+import { ArrowRight, Download, Code2, Brain, Database, Globe, Github, Linkedin, Mail, Sparkles, Palette, Zap, Layers, Settings, Atom, Briefcase, Phone, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
 const techStack = [
   { name: "TypeScript", icon: Code2 },
-  { name: "Python", icon: Code2 },
+  { name: "React", icon: Atom },
   { name: "Next.js", icon: Globe },
+  { name: "Tailwind CSS", icon: Palette },
+  { name: "Framer Motion", icon: Zap },
+  { name: "Python", icon: Code2 },
   { name: "AI Agents", icon: Brain },
+  { name: "Radix UI", icon: Layers },
   { name: "Backend Systems", icon: Database },
   { name: "Data Automation", icon: Database },
+  { name: "PostCSS", icon: Settings },
 ];
 
 const featuredProjects = [
@@ -27,10 +32,11 @@ const featuredProjects = [
     image: "/images/voya-interface.jpg",
   },
   {
-    title: "Coffee Trends Agent",
-    description: "Data-driven insights platform for coffee industry trends",
+    title: "Baho Coffee AI Assistant",
+    description: "Specialized AI assistant bridging Rwandan coffee farmers with the global specialty coffee market",
     category: "AI",
-    href: "/projects#coffee-trends",
+    href: "/projects#baho-coffee-ai",
+    image: "/images/AI Baho Coffee.jpg",
   },
   {
     title: "ExpressGo",
@@ -99,7 +105,7 @@ export default function Home() {
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 dark:bg-primary/20 border border-primary/20 text-sm font-medium text-primary mb-6"
               >
                 <Sparkles className="h-3 w-3" />
-                <span>Available for opportunities</span>
+                <span>Open For Tech Solutions Collaboration</span>
               </motion.div>
 
               <motion.h1
@@ -147,18 +153,69 @@ export default function Home() {
                 transition={{ duration: 0.6, delay: 0.6 }}
                 className="flex flex-wrap items-center gap-4 pt-4"
               >
-                <Button asChild size="lg" className="group text-base px-8 py-6 h-auto rounded-xl">
-                  <Link href="/projects">
-                    View Projects
-                    <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-                  </Link>
-                </Button>
-                <Button asChild variant="outline" size="lg" className="group text-base px-8 py-6 h-auto rounded-xl border-2">
-                  <Link href="/resume">
-                    <Download className="mr-2 h-5 w-5" />
-                    Download Resume
-                  </Link>
-                </Button>
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Button asChild size="lg" className="group text-base px-8 py-6 h-auto rounded-xl relative overflow-hidden">
+                    <Link href="/projects">
+                      <motion.span
+                        className="relative z-10 flex items-center"
+                        whileHover={{ x: 2 }}
+                      >
+                        View Projects
+                        <motion.div
+                          animate={{ x: [0, 5, 0] }}
+                          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                        >
+                          <ArrowRight className="ml-2 h-5 w-5" />
+                        </motion.div>
+                      </motion.span>
+                    </Link>
+                  </Button>
+                </motion.div>
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Button asChild variant="outline" size="lg" className="group text-base px-8 py-6 h-auto rounded-xl border-2">
+                    <Link href="/experience">
+                      <motion.div
+                        className="flex items-center"
+                        whileHover={{ x: 2 }}
+                      >
+                        <motion.div
+                          animate={{ rotate: [0, 5, -5, 0] }}
+                          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                        >
+                          <Briefcase className="mr-2 h-5 w-5" />
+                        </motion.div>
+                        Experience
+                      </motion.div>
+                    </Link>
+                  </Button>
+                </motion.div>
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Button asChild variant="outline" size="lg" className="group text-base px-8 py-6 h-auto rounded-xl border-2">
+                    <Link href="/resume">
+                      <motion.div
+                        className="flex items-center"
+                        whileHover={{ x: 2 }}
+                      >
+                        <motion.div
+                          animate={{ y: [0, -3, 0] }}
+                          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                        >
+                          <Download className="mr-2 h-5 w-5" />
+                        </motion.div>
+                        Download Resume
+                      </motion.div>
+                    </Link>
+                  </Button>
+                </motion.div>
               </motion.div>
 
               {/* Social Links */}
@@ -187,11 +244,27 @@ export default function Home() {
                   <Linkedin className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />
                 </a>
                 <a
-                  href="mailto:frank.ishimwe@example.com"
+                  href="mailto:ishimwefrank0014@gmail.com"
                   className="p-3 rounded-xl bg-muted hover:bg-primary/10 transition-colors group"
                   aria-label="Email"
                 >
                   <Mail className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />
+                </a>
+                <a
+                  href="tel:+250782658368"
+                  className="p-3 rounded-xl bg-muted hover:bg-primary/10 transition-colors group"
+                  aria-label="Phone"
+                >
+                  <Phone className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />
+                </a>
+                <a
+                  href="https://wa.me/250782658368"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-3 rounded-xl bg-muted hover:bg-primary/10 transition-colors group"
+                  aria-label="WhatsApp"
+                >
+                  <MessageCircle className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />
                 </a>
               </motion.div>
             </motion.div>
@@ -327,22 +400,38 @@ export default function Home() {
               return (
                 <motion.div
                   key={tech.name}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0, y: 20, scale: 0.9 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  whileHover={{ y: -8, scale: 1.05 }}
+                  transition={{ 
+                    duration: 0.5, 
+                    delay: index * 0.1,
+                    type: "spring",
+                    stiffness: 100
+                  }}
+                  whileHover={{ y: -12, scale: 1.08 }}
+                  whileTap={{ scale: 0.95 }}
                 >
-                  <Card className="h-full hover:border-primary/50 transition-all duration-300 cursor-pointer group border-2 rounded-2xl">
-                    <CardContent className="p-6 flex flex-col items-center justify-center space-y-3 text-center">
+                  <Card className="h-full hover:border-primary/50 transition-all duration-300 cursor-pointer group border-2 rounded-2xl relative overflow-hidden">
+                    <motion.div
+                      className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                      initial={{ scale: 0.8 }}
+                      whileHover={{ scale: 1 }}
+                    />
+                    <CardContent className="p-6 flex flex-col items-center justify-center space-y-3 text-center relative z-10">
                       <motion.div
-                        whileHover={{ rotate: 360 }}
-                        transition={{ duration: 0.6 }}
+                        whileHover={{ rotate: 360, scale: 1.15 }}
+                        transition={{ duration: 0.6, type: "spring" }}
                         className="p-3 rounded-xl bg-primary/10 group-hover:bg-primary/20 transition-colors"
                       >
                         <Icon className="h-6 w-6 text-primary" />
                       </motion.div>
-                      <p className="text-sm font-semibold group-hover:text-primary transition-colors">{tech.name}</p>
+                      <motion.p 
+                        className="text-sm font-semibold group-hover:text-primary transition-colors"
+                        whileHover={{ scale: 1.1 }}
+                      >
+                        {tech.name}
+                      </motion.p>
                     </CardContent>
                   </Card>
                 </motion.div>
@@ -372,11 +461,17 @@ export default function Home() {
             {featuredProjects.map((project, index) => (
               <motion.div
                 key={project.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: 30, scale: 0.95 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileHover={{ y: -8 }}
+                transition={{ 
+                  duration: 0.5, 
+                  delay: index * 0.1,
+                  type: "spring",
+                  stiffness: 100
+                }}
+                whileHover={{ y: -12, scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
               >
                 <Card className="h-full overflow-hidden hover:border-primary/50 transition-all duration-300 cursor-pointer group border-2 rounded-2xl">
                   {project.image && (
@@ -447,21 +542,56 @@ export default function Home() {
             {impactStatements.map((statement, index) => (
               <motion.div
                 key={statement.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: 30, scale: 0.95 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileHover={{ y: -8 }}
+                transition={{ 
+                  duration: 0.5, 
+                  delay: index * 0.15,
+                  type: "spring",
+                  stiffness: 100
+                }}
+                whileHover={{ y: -12, scale: 1.02 }}
               >
-                <Card className="h-full hover:border-primary/50 transition-all duration-300 group border-2 rounded-2xl p-8">
-                  <div className="space-y-4">
-                    <div className="w-12 h-12 rounded-xl bg-primary/10 group-hover:bg-primary/20 transition-colors flex items-center justify-center">
-                      <div className="w-6 h-6 rounded-full bg-primary" />
-                    </div>
-                    <h3 className="text-xl font-bold group-hover:text-primary transition-colors">{statement.title}</h3>
-                    <p className="text-muted-foreground leading-relaxed group-hover:text-foreground/80 transition-colors">
+                <Card className="h-full hover:border-primary/50 transition-all duration-300 group border-2 rounded-2xl p-8 relative overflow-hidden">
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    whileHover={{ scale: 1, opacity: 1 }}
+                  />
+                  <div className="space-y-4 relative z-10">
+                    <motion.div 
+                      className="w-12 h-12 rounded-xl bg-primary/10 group-hover:bg-primary/20 transition-colors flex items-center justify-center"
+                      whileHover={{ rotate: 360, scale: 1.1 }}
+                      transition={{ duration: 0.6 }}
+                    >
+                      <motion.div 
+                        className="w-6 h-6 rounded-full bg-primary"
+                        animate={{ 
+                          scale: [1, 1.2, 1],
+                          opacity: [0.7, 1, 0.7]
+                        }}
+                        transition={{
+                          duration: 2,
+                          repeat: Infinity,
+                          ease: "easeInOut"
+                        }}
+                      />
+                    </motion.div>
+                    <motion.h3 
+                      className="text-xl font-bold group-hover:text-primary transition-colors"
+                      whileHover={{ x: 5 }}
+                      transition={{ type: "spring", stiffness: 400 }}
+                    >
+                      {statement.title}
+                    </motion.h3>
+                    <motion.p 
+                      className="text-muted-foreground leading-relaxed group-hover:text-foreground/80 transition-colors"
+                      initial={{ opacity: 0.8 }}
+                      whileHover={{ opacity: 1 }}
+                    >
                       {statement.description}
-                    </p>
+                    </motion.p>
                   </div>
                 </Card>
               </motion.div>
